@@ -30,10 +30,20 @@ final class RideCommand implements CommandExecutor {
             if (vehicle == null) {
                 return true;
             }
+            if (target == vehicle) {
+                sender.sendMessage(ChatColor.RED + "Target and vehicle are the same entity");   // $NLS-1$
+                return true;
+            }
+            if (target.isInsideVehicle())
+                target.leaveVehicle();
  
             target.addPassenger(vehicle);
             sender.sendMessage(String.format("Mounted %s onto %s.", target.getName(), vehicle.getName()));  // $NLS-1$
         } else if ("dismount".equalsIgnoreCase(args[1])) {  // $NON-NLS-1$
+            if (!target.isInsideVehicle()) {
+                sender.sendMessage(String.format(ChatColor.RED + "%s is not in a vehicle", target));    // $NLS-1$
+                return true;
+            }
             target.leaveVehicle();
             sender.sendMessage(String.format("Dismounted %s.", target.getName()));  // $NLS-1$
         } else {
