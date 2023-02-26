@@ -1,0 +1,16 @@
+name: RideCommand
+version: '${version}'
+api-version: 1.13
+main: xland.mcplugin.ridecommand.RideCommandPlugin
+authors: [ teddyxlandlee ]
+description: Adds /ride command to older Minecraft versions
+
+permissions:
+  'ridecommand.use':
+    description: 'Permission to use the /ride command'
+    default: 'op'
+commands:
+  ride:
+    usage: '/ride <target> mount <vehicle> OR /ride <target> dismount'
+    description: 'Controls an entity to mount or dismount from another entity.'
+    permission: 'ridecommand.use'
